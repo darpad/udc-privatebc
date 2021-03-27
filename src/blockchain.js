@@ -126,7 +126,16 @@ class Blockchain {
             if(bitcoinMessage.verify(message, address, signature)) {
                 // create the new block
                 let block = new BlockClass.Block(new BlockData(message, address, star));
-                return await this._addBlock(block);
+
+                // validate the chain so far
+                let errors = await this.validateChain();
+                if(errors.length !==0) {
+                    throw new Error("Chain is not valid");
+                }
+
+                // chain valid add block
+                await this._addBlock(block);
+                return block;
             }else {
                     throw new Error("Message can no be verified");
             }
@@ -203,6 +212,7 @@ class Blockchain {
                 }
             }
         }
+        return errors;
     }
 }
 

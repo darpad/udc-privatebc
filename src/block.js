@@ -39,8 +39,11 @@ class Block {
         // Save in auxiliary variable the current block hash
         let currentHash = this.hash;
 
+        const blockWithoutHash =  JSON.parse(JSON.stringify(this));
+        blockWithoutHash.hash = null;
+
         // Recalculate the hash of the Block
-        let recalculatedHash = SHA256(JSON.stringify(this)).toString();
+        let recalculatedHash = SHA256(JSON.stringify(blockWithoutHash)).toString();
 
         // Comparing if the hashes changed
         return recalculatedHash === currentHash
