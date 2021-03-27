@@ -214,12 +214,5 @@ class BlockData {
     }
 }
 
-class Star {
-    constructor(dec, ra, story) {
-        this.dec = dec;
-        this.ra = ra;
-        this.story = story;
-    }
-}
 
 module.exports.Blockchain = Blockchain;
