@@ -137,7 +137,7 @@ class Blockchain {
                 await this._addBlock(block);
                 return block;
             }else {
-                    throw new Error("Message can no be verified");
+                    throw new Error("Message can not be verified");
             }
         }
 
@@ -199,7 +199,7 @@ class Blockchain {
             const block = this.chain[i];
 
             //validate the current block
-            if(!block.validate()) {
+            if(!await block.validate()) {
                 errors.push(`Hash is not valid in block ${block.height}`)
                 continue;
             }
